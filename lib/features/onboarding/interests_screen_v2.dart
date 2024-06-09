@@ -54,7 +54,7 @@ class InterestsScreenV2 extends StatefulWidget {
 
 class _InterestsScreenV2State extends State<InterestsScreenV2> {
   final ScrollController _verticalScrollController = ScrollController();
-  // final List<ScrollController> _horizontalScrollControllers = [];
+  final List<ScrollController> _horizontalScrollControllers = [];
   final Set<String> _selectedDetailInterests = {};
 
   bool _showTitle = false;
@@ -68,16 +68,16 @@ class _InterestsScreenV2State extends State<InterestsScreenV2> {
 
   void _initializeHorizontalScrollControllers() {
     for (int i = 0; i < widget.selectedInterests.length; i++) {
-      // _horizontalScrollControllers.add(ScrollController());
+      _horizontalScrollControllers.add(ScrollController());
     }
   }
 
   @override
   void dispose() {
     _verticalScrollController.dispose();
-    // for (var controller in _horizontalScrollControllers) {
-    //   controller.dispose();
-    // }
+    for (var controller in _horizontalScrollControllers) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -175,10 +175,10 @@ class _InterestsScreenV2State extends State<InterestsScreenV2> {
                             ),
                             Gaps.v14,
                             Scrollbar(
-                              // controller: _horizontalScrollControllers[i],
+                              controller: _horizontalScrollControllers[i],
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
-                                // controller: _horizontalScrollControllers[i],
+                                controller: _horizontalScrollControllers[i],
                                 child: Column(
                                   children: [
                                     Wrap(
