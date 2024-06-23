@@ -32,6 +32,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   void _onWriteTap() {
+    print("Write tapped");
     showModalBottomSheet(
       // backgroundColor: Colors.white,
       context: context,
@@ -41,6 +42,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       isScrollControlled: true,
     );
+    setState(() {
+      // _selectedIndex = 2;
+    });
   }
 
   @override
