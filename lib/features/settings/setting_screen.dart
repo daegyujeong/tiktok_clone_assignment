@@ -1,15 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tiktok_clone_assignment/features/settings/models/setting_model.dart';
 import 'package:tiktok_clone_assignment/features/settings/privacy_screen.dart';
+import 'package:tiktok_clone_assignment/features/settings/repos/setting_repo.dart';
+import 'package:tiktok_clone_assignment/features/settings/view_models/setting_view_model.dart';
 
-class SettingsScreen extends StatefulWidget {
+final settingRepositoryProvider = Provider<SettingRepository>((ref) {
+  final sharedPreferences = ref.watch(sharedPreferencesProvider);
+  return SettingRepository(sharedPreferences);
+});
+
+final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
+  throw UnimplementedError();
+});
+
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool _isLoading = false;
 
   void _navigateToPrivacyScreen(BuildContext context) {
@@ -56,6 +70,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final settingViewModel = ref.watch(settingProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -97,6 +113,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
             leading: const Icon(Icons.info),
             title: const Text('About'),
             onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.brightness_6),
+            title: const Text('Dark Mode'),
+            trailing: DropdownButton<DarkMode>(
+              value: settingViewModel.darkmode,
+              onChanged: (DarkMode? newValue) {
+                if (newValue != null) {
+                  settingViewModel.setDarkMode(newValue);
+                }
+              },
+              items: DarkMode.values.map((DarkMode mode) {
+                return DropdownMenuItem<DarkMode>(
+                  value: mode,
+                  child: Text(mode.toString().split('.').last),
+                );
+              }).toList(),
+            ),
           ),
           ListTile(
             title: Row(

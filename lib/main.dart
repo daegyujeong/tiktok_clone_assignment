@@ -8,6 +8,9 @@ import 'package:tiktok_clone_assignment/features/authentication/verification_scr
 import 'package:tiktok_clone_assignment/features/main_navigation/main_navigation.dart';
 import 'package:tiktok_clone_assignment/features/onboarding/interests_screen.dart';
 import 'package:tiktok_clone_assignment/features/onboarding/interests_screen_v2.dart';
+import 'package:tiktok_clone_assignment/features/settings/models/setting_model.dart';
+import 'package:tiktok_clone_assignment/features/settings/repos/setting_repo.dart';
+import 'package:tiktok_clone_assignment/features/settings/view_models/setting_view_model.dart';
 import 'package:tiktok_clone_assignment/features/videos/repos/playback_config_repo.dart';
 import 'package:tiktok_clone_assignment/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok_clone_assignment/firebase_options.dart';
@@ -27,27 +30,47 @@ void main() async {
   );
 
   final preferences = await SharedPreferences.getInstance();
+  final preferences2 = await SharedPreferences.getInstance();
+  final settingRepository = SettingRepository(preferences2);
   final repository = PlaybackConfigRepository(preferences);
 
   runApp(
     ProviderScope(
       overrides: [
         playbackConfigProvider
-            .overrideWith(() => PlaybackConfigViewModel(repository))
+            .overrideWith(() => PlaybackConfigViewModel(repository)),
+        settingProvider
+            .overrideWith((ref) => SettingViewModel(settingRepository)),
       ],
       child: const TikTokApp(),
     ),
   );
 }
 
-class TikTokApp extends StatelessWidget {
+class TikTokApp extends ConsumerWidget {
   const TikTokApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settingViewModel = ref.watch(settingProvider);
+    ThemeMode themeMode;
+
+    switch (settingViewModel.darkmode) {
+      case DarkMode.light:
+        themeMode = ThemeMode.light;
+        break;
+      case DarkMode.dark:
+        themeMode = ThemeMode.dark;
+        break;
+      case DarkMode.system:
+      default:
+        themeMode = ThemeMode.system;
+        break;
+    }
+
     return MaterialApp(
       title: 'TikTok Clone',
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
       theme: ThemeData(
         useMaterial3: false,
         scaffoldBackgroundColor: Colors.white,
