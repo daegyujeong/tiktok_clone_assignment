@@ -3,47 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone_assignment/constants/gaps.dart';
 import 'package:tiktok_clone_assignment/constants/sizes.dart';
 import 'package:tiktok_clone_assignment/features/post/widgets/postitem.dart';
-
-const interests = [
-  "Daily Life",
-  "Comedy",
-  "Entertainment",
-  "Animals",
-  "Food",
-  "Beauty & Style",
-  "Drama",
-  "Learning",
-  "Talent",
-  "Sports",
-  "Auto",
-  "Family",
-  "Fitness & Health",
-  "DIY & Life Hacks",
-  "Arts & Crafts",
-  "Dance",
-  "Outdoors",
-  "Oddly Satisfying",
-  "Home & Garden",
-  "Daily Life",
-  "Comedy",
-  "Entertainment",
-  "Animals",
-  "Food",
-  "Beauty & Style",
-  "Drama",
-  "Learning",
-  "Talent",
-  "Sports",
-  "Auto",
-  "Family",
-  "Fitness & Health",
-  "DIY & Life Hacks",
-  "Arts & Crafts",
-  "Dance",
-  "Outdoors",
-  "Oddly Satisfying",
-  "Home & Garden",
-];
+import 'package:tiktok_clone_assignment/features/post/widgets/postitem2.dart';
 
 class PostMain extends StatefulWidget {
   const PostMain({super.key});
@@ -109,7 +69,7 @@ class _PostMainState extends State<PostMain> {
                       PostItem(),
                       PostItem(),
                       PostItem(),
-                      PostItem(),
+                      PostItemWithPhotos(),
                     ],
                   ),
                 ),

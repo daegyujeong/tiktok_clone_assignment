@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiktok_clone_assignment/constants/sizes.dart';
+import 'package:tiktok_clone_assignment/features/account/sign_in_screen.dart';
 import 'package:tiktok_clone_assignment/features/authentication/verification_screen.dart';
 import 'package:tiktok_clone_assignment/features/main_navigation/main_navigation.dart';
 import 'package:tiktok_clone_assignment/features/onboarding/interests_screen.dart';
@@ -15,6 +16,7 @@ import 'package:tiktok_clone_assignment/features/videos/repos/playback_config_re
 import 'package:tiktok_clone_assignment/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok_clone_assignment/firebase_options.dart';
 import 'package:tiktok_clone_assignment/features/post/post_main.dart';
+import 'package:tiktok_clone_assignment/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,17 +36,15 @@ void main() async {
   final settingRepository = SettingRepository(preferences2);
   final repository = PlaybackConfigRepository(preferences);
 
-  runApp(
-    ProviderScope(
-      overrides: [
-        playbackConfigProvider
-            .overrideWith(() => PlaybackConfigViewModel(repository)),
-        settingProvider
-            .overrideWith((ref) => SettingViewModel(settingRepository)),
-      ],
-      child: const TikTokApp(),
-    ),
-  );
+  runApp(ProviderScope(
+    overrides: [
+      // sharedPreferencesProvider.overrideWithValue(preferences),
+      settingConfigProvider
+          .overrideWith(() => SettingViewModel(settingRepository)),
+      // playbackConfigRepositoryProvider.overrideWithValue(repository),
+    ],
+    child: const TikTokApp(),
+  ));
 }
 
 class TikTokApp extends ConsumerWidget {
@@ -52,10 +52,10 @@ class TikTokApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final settingViewModel = ref.watch(settingProvider);
+    final darkmode = ref.watch(settingConfigProvider).darkmode;
     ThemeMode themeMode;
 
-    switch (settingViewModel.darkmode) {
+    switch (darkmode) {
       case DarkMode.light:
         themeMode = ThemeMode.light;
         break;
@@ -68,7 +68,8 @@ class TikTokApp extends ConsumerWidget {
         break;
     }
 
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: ref.watch(routerProvider),
       title: 'TikTok Clone',
       themeMode: themeMode,
       theme: ThemeData(
@@ -94,7 +95,8 @@ class TikTokApp extends ConsumerWidget {
         ),
         primaryColor: const Color(0xFFE9435A),
       ),
-      home: const MainNavigationScreen(), //VerificationScreen(),
+      // home:
+      //     const MainNavigationScreen(), //SignInScreen(), //MainNavigationScreen() VerificationScreen(),
     );
   }
 }

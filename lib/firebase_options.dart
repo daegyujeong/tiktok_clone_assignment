@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -44,33 +41,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBwfoYQ2fDdedxfVGV4jFY6_wANgm4M838',
-    appId: '1:476947291063:web:0350f404ae46e426e0a632',
-    messagingSenderId: '476947291063',
-    projectId: 'tiktok-abc-xyz',
-    authDomain: 'tiktok-abc-xyz.firebaseapp.com',
-    storageBucket: 'tiktok-abc-xyz.appspot.com',
+    apiKey: 'AIzaSyBnnykaLTNMF0t_qmYbfT_PwAtZF1vntsM',
+    appId: '1:761169513958:web:1fbebecba93f0203ccda27',
+    messagingSenderId: '761169513958',
+    projectId: 'my-tictok-practice',
+    authDomain: 'my-tictok-practice.firebaseapp.com',
+    storageBucket: 'my-tictok-practice.appspot.com',
+    measurementId: 'G-F00MHKG7H4',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAqjB_ClOmAh_tEnIq3qDDbgWi2izP6Jzo',
-    appId: '1:476947291063:android:36b0327a5d1f9145e0a632',
-    messagingSenderId: '476947291063',
-    projectId: 'tiktok-abc-xyz',
-    storageBucket: 'tiktok-abc-xyz.appspot.com',
+    apiKey: 'AIzaSyDj-Iz6LW9ygLML_8a46A3G6hmwdhuwUHk',
+    appId: '1:761169513958:android:f13639fd859dc855ccda27',
+    messagingSenderId: '761169513958',
+    projectId: 'my-tictok-practice',
+    storageBucket: 'my-tictok-practice.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBut0ecAdRTg-ootQAetxwQMayibUjs1AU',
-    appId: '1:476947291063:ios:9ea83a901b668d25e0a632',
-    messagingSenderId: '476947291063',
-    projectId: 'tiktok-abc-xyz',
-    storageBucket: 'tiktok-abc-xyz.appspot.com',
-    androidClientId:
-        '476947291063-9r9crc1o5vrvnebk499c8qllvnsb79ee.apps.googleusercontent.com',
-    iosClientId:
-        '476947291063-qrcet8e2k6ooket4cgnhthv49l0mta1m.apps.googleusercontent.com',
-    iosBundleId: 'co.nomadcoders.tiktok',
+    apiKey: 'AIzaSyC9HJE-ZzpkQO-B8JQdfxy31G8naF8VJeo',
+    appId: '1:761169513958:ios:be4d5fc8d82bdc08ccda27',
+    messagingSenderId: '761169513958',
+    projectId: 'my-tictok-practice',
+    storageBucket: 'my-tictok-practice.appspot.com',
+    iosBundleId: 'com.example.tiktokCloneAssignment',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -85,4 +79,15 @@ class DefaultFirebaseOptions {
         '476947291063-ta4mq8mpcs4p3vkbgf5dp57d3u46og32.apps.googleusercontent.com',
     iosBundleId: 'com.example.tiktokClone',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBnnykaLTNMF0t_qmYbfT_PwAtZF1vntsM',
+    appId: '1:761169513958:web:66c0805f2683ecb9ccda27',
+    messagingSenderId: '761169513958',
+    projectId: 'my-tictok-practice',
+    authDomain: 'my-tictok-practice.firebaseapp.com',
+    storageBucket: 'my-tictok-practice.appspot.com',
+    measurementId: 'G-16NHVDYFCR',
+  );
+
 }

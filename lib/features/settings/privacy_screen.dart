@@ -48,7 +48,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             onTap: () {},
           ),
           ListTile(
-            leading: const FaIcon(FontAwesomeIcons.volumeMute),
+            leading: const FaIcon(FontAwesomeIcons.volumeXmark),
             title: const Text('Muted'),
             onTap: () {},
           ),
@@ -58,7 +58,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             onTap: () {},
           ),
           ListTile(
-            leading: const FaIcon(FontAwesomeIcons.userFriends),
+            leading: const FaIcon(FontAwesomeIcons.userGroup),
             title: const Text('Profiles you follow'),
             onTap: () {},
           ),

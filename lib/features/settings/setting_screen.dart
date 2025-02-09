@@ -7,24 +7,19 @@ import 'package:tiktok_clone_assignment/features/settings/privacy_screen.dart';
 import 'package:tiktok_clone_assignment/features/settings/repos/setting_repo.dart';
 import 'package:tiktok_clone_assignment/features/settings/view_models/setting_view_model.dart';
 
-final settingRepositoryProvider = Provider<SettingRepository>((ref) {
-  final sharedPreferences = ref.watch(sharedPreferencesProvider);
-  return SettingRepository(sharedPreferences);
-});
+// final settingRepositoryProvider = Provider<SettingRepository>((ref) {
+//   final sharedPreferences = ref.watch(sharedPreferencesProvider);
+//   return SettingRepository(sharedPreferences);
+// });
 
-final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
-  throw UnimplementedError();
-});
+// final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
+//   throw UnimplementedError();
+// });
 
-class SettingsScreen extends ConsumerStatefulWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
-  @override
-  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   void _navigateToPrivacyScreen(BuildContext context) {
     Navigator.of(context).push(
@@ -34,43 +29,42 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  void _showLogoutDialog(BuildContext context) {
-    setState(() {
-      _isLoading = true;
-    });
-
-    // Simulate a delay to show the loading animation
-    Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        _isLoading = false;
-      });
-      showCupertinoDialog(
-        context: context,
-        builder: (context) => CupertinoAlertDialog(
-          title: const Text('Log Out'),
-          content: const Text('Are you sure you want to log out?'),
-          actions: [
-            CupertinoDialogAction(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            CupertinoDialogAction(
-              isDestructiveAction: true,
-              child: const Text('Log Out'),
-              onPressed: () {
-                // Handle log out action
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-      );
-    });
-  }
+  // void _showLogoutDialog(BuildContext context) {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //   // Simulate a delay to show the loading animation
+  //   Future.delayed(const Duration(seconds: 2), () {
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //     showCupertinoDialog(
+  //       context: context,
+  //       builder: (context) => CupertinoAlertDialog(
+  //         title: const Text('Log Out'),
+  //         content: const Text('Are you sure you want to log out?'),
+  //         actions: [
+  //           CupertinoDialogAction(
+  //             child: const Text('Cancel'),
+  //             onPressed: () => Navigator.of(context).pop(),
+  //           ),
+  //           CupertinoDialogAction(
+  //             isDestructiveAction: true,
+  //             child: const Text('Log Out'),
+  //             onPressed: () {
+  //               // Handle log out action
+  //               Navigator.of(context).pop();
+  //             },
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   });
+  // }
 
   @override
-  Widget build(BuildContext context) {
-    final settingViewModel = ref.watch(settingProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final settingViewModel = ref.watch(settingProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -118,10 +112,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             leading: const Icon(Icons.brightness_6),
             title: const Text('Dark Mode'),
             trailing: DropdownButton<DarkMode>(
-              value: settingViewModel.darkmode,
+              value: ref.watch(settingConfigProvider).darkmode,
               onChanged: (DarkMode? newValue) {
                 if (newValue != null) {
-                  settingViewModel.setDarkMode(newValue);
+                  ref
+                      .read(settingConfigProvider.notifier)
+                      .setDarkMode(newValue);
+                  // settingViewModel.setDarkMode(newValue);
                 }
               },
               items: DarkMode.values.map((DarkMode mode) {
@@ -147,7 +144,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 if (_isLoading) const CupertinoActivityIndicator(),
               ],
             ),
-            onTap: () => _showLogoutDialog(context),
+            // onTap: () => _showLogoutDialog(context),
           ),
         ],
       ),

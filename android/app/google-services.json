@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "761169513958",
+    "project_id": "my-tictok-practice",
+    "storage_bucket": "my-tictok-practice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761169513958:android:f13639fd859dc855ccda27",
+        "android_client_info": {
+          "package_name": "com.exa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj-Iz6LW9ygLML_8a46A3G6hmwdhuwUHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761169513958:android:a3460b8fad85bb4dccda27",
+        "android_client_info": {
+          "package_name": "com.example.tiktok_clone_assignment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj-Iz6LW9ygLML_8a46A3G6hmwdhuwUHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

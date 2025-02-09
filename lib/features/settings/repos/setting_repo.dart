@@ -14,6 +14,7 @@ class SettingRepository {
 
   DarkMode getDarkMode() {
     final index = _preferences.getInt(_darkmode) ?? DarkMode.system.index;
+    // const index = 0;
     return DarkMode.values[index];
   }
 }
